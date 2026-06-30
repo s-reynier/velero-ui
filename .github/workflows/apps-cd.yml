@@ -31,7 +31,9 @@ jobs:
           node-version: 22
           cache: 'npm'
 
-      - run: npm ci
+      # Upstream package-lock.json is out of sync with package.json
+      # (e.g. @noble/hashes), which breaks `npm ci`. Use install for the fork build.
+      - run: npm install --no-audit --no-fund
 
       - uses: nrwl/nx-set-shas@v4
 
