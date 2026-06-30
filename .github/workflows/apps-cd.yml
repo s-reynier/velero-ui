@@ -37,7 +37,9 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: npx nx run-many -t build --prod
+      # Build only the image projects (frontend + api); skip docs (docusaurus
+      # plugin not needed) which otherwise breaks the run-many build.
+      - run: npx nx run-many -t build -p velero-ui velero-ui-api --prod
 
       - name: get-npm-version
         id: package-version
